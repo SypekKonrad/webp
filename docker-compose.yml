@@ -19,5 +19,16 @@ services:
       - POSTGRES_PASSWORD=dbdevpass
       - POSTGRES_DB=devdb
 
+  frontend:
+    build: ./frontend
+    command: npm start
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
 volumes:
   postgres_data:
