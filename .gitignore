@@ -1,0 +1,11 @@
+venv
+.env.dev
+.env
+.env.prod
+.env.prod.db
+db.sqlite3
+__pycache__
+.idea/
+.DS_Store
+node_modules
+todolist.txt
