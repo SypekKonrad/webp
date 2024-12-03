@@ -1,0 +1,107 @@
+.navbar {
+  background: linear-gradient(90deg, #3a99d9, #327bb0); /* Add a gradient for a modern look */
+  padding: 1rem 2rem;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  margin: 0;
+  border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.navbar:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/*.navbar-container {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*}*/
+.navbar-container {
+  display: flex;
+  justify-content: center; /* Center all content horizontally */
+  align-items: center; /* Center all content vertically */
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: inline-block;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500; /* Slightly thicker text for better readability */
+  transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
+  padding: 0.5rem 1rem; /* Add padding for a button-like feel */
+  border-radius: 8px; /* Rounded corners for links */
+}
+
+.navbar-link:hover {
+  color: #ffffff; /* Brighten the text color */
+  background-color: rgba(255, 255, 255, 0.2); /* Add a translucent background */
+}
+
+
+
+/*.navbar {*/
+/*    !*padding: 20px;*!*/
+/*  !*background-color: #282c34;*!*/
+/*  !*background-color: #4db7e6;*!*/
+/*  background-color: #3a99d9;*/
+/*  padding: 1rem 2rem;*/
+/*  color: white;*/
+/*  box-shadow: none;*/
+/*  margin: 0;*/
+/*}*/
+/*!*color: #61dafb;*!*/
+/*.navbar-container {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+/*.navbar-links {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    gap: 1.5rem;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.navbar-item {*/
+/*    display: inline-block;*/
+/*}*/
+/*    !*color: #eaeaea;*!*/
+
+/*.navbar-link {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    font-size: 1rem;*/
+/*    transition: color 0.3s;*/
+/*}*/
+
+/*.navbar-link:hover {*/
+/*    !*color: #282c34;*!*/
+/*    color: #444;*/
+/*}*/
+
+
+
+/*!* Logo styling *!*/
+/*!*.navbar-logo {*!*/
+/*!*    font-size: 1.5rem;*!*/
+/*!*    font-weight: bold;*!*/
+/*!*    color: #61dafb;*!*/
+/*!*    cursor: pointer;*!*/
+/*!*}*!*/
+
+/*!* Navbar links *!*/
