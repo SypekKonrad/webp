@@ -9,7 +9,7 @@ const Navbar: React.FC = () => (
                 <li className="navbar-item"><a href="/" className="navbar-link">Home</a></li>
                 <li className="navbar-item"><a href="/contact" className="navbar-link">Contact Me</a></li>
                 {/*reful url dac*/}
-                <li className="navbar-item"><a href="/contact" className="navbar-link">Refueling Data</a></li>
+                <li className="navbar-item"><a href="/car-data" className="navbar-link">Refueling Data</a></li>
 
                 {/*dac guzik do jakiegos socjalu/gita*/}
                 {/*<li className="navbar-item"><a href="/contact" className="navbar-link">Github</a></li>*/}
