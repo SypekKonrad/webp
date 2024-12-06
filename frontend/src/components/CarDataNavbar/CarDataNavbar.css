@@ -1,0 +1,41 @@
+.car-data-navbar {
+  padding: 1rem 2rem;
+  color: white;
+  margin: 0;
+  border-radius: 0 0 15px 15px;
+}
+
+.car-data-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.button-container {
+  margin-bottom: 30px;
+}
+
+.button {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: #327bb0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transition on hover */
+}
+
+.button:hover {
+  background-color: #3a99d9;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+
+.button:active {
+  background-color: #327bb0;
+  transform: translateY(2px);
+}
+
