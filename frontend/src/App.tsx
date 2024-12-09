@@ -1,12 +1,8 @@
 import React from 'react';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {  Routes, Route, Link, useLocation } from 'react-router-dom';
-// BrowserRouter,
 import CarDataNavbar from './components/CarDataNavbar/CarDataNavbar';
 import Navbar from './components/navbar/navbar';
-
-
-
+import { CarDataProvider } from './context/CarDataContext';
 import Home from './templates/Home';
 import CarDataReadme from './templates/car-data/CarDataReadme';
 import CarDataRaw from './templates/car-data/CarDataRaw';
@@ -19,21 +15,37 @@ function App() {
 
     return (
     <div className="App">
-      {/* Always render the main Navbar */}
+        {/*global navbar*/}
       <Navbar />
 
-      {/* Conditionally render the CarDataNavbar only for /car-data routes */}
+        {/*car data navbar*/}
       {location.pathname.startsWith('/car-data') && <CarDataNavbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/car-data" element={<CarDataReadme />} />
-        <Route path="/car-data/raw" element={<CarDataRaw />} />
+
+        <Route
+            path="/car-data/*"
+            element={
+              <CarDataProvider>
+                <CarDataRoutes />
+              </CarDataProvider>
+            }
+          />
+
       </Routes>
     </div>
   );
 };
 
+const CarDataRoutes: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="" element={<CarDataReadme />} />
+      <Route path="raw" element={<CarDataRaw />} />
+    </Routes>
+  );
+};
 
 
 

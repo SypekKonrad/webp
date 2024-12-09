@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .serializers import CarDataSerializer
 from google.oauth2.service_account import Credentials
 import gspread
 import pandas as pd
@@ -27,14 +28,19 @@ class GetCarData(APIView):
 
             df = pd.DataFrame(raw_data[4:], columns=raw_data[0])
             selected_columns = df.iloc[:, [11, 12, 13, 14]].copy()
-            selected_columns.columns = ['Date', 'Price', 'Kilometers Traveled', 'Liters']
+            selected_columns.columns = ['Date', 'Price', 'Kilometers_Traveled', 'Liters']
 
             selected_columns.replace('', np.nan, inplace=True)
             selected_columns.dropna(inplace=True)
 
             cleaned_data = selected_columns.to_dict(orient='records')
 
-            return Response(cleaned_data, status=status.HTTP_200_OK)
+            serializer = CarDataSerializer(selected_columns.to_dict(orient='records'), many=True)            # return Response(cleaned_data, status=status.HTTP_200_OK)
+            return Response(
+                {"data": serializer.data},
+                status=status.HTTP_200_OK
+            )
+
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

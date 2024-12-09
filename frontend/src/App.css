@@ -7,7 +7,6 @@ main {
   /*text-align: center;*/
   /*background-color: lightblue;*/
   /*padding: 20px;*/
-
 }
 
 body,
@@ -16,15 +15,11 @@ html {
   margin: 0;
   background-color: #eaeaea; /* Light grey background, tego uzywam docelowo */
   /*background-color: #f0f0f0; !* Light grey background *!*/
-  /*background-color: #f0f0f0; !* Light grey background *!*/
 }
   /*background-color: #CCD1D8; !* Light grey background *!*/
-
-
 html,
 body,
 #root {
   height: 100%;
-  overflow: hidden;
 
 }

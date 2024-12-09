@@ -10,16 +10,16 @@ html, body {
   flex-direction: column;
 }
 
-.body {
-  display: flex; /* Enable flexbox on the container */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-  height: 100%; /* Ensure the body takes the full height of its parent */
-  text-align: center; /* Center-align text inside the body */
-  gap: 1rem; /* Optional: add spacing between elements */
-  margin-top: 20px;
-}
+/*.body {*/
+/*  display: flex; !* Enable flexbox on the container *!*/
+/*  flex-direction: column; !* Stack children vertically *!*/
+/*  justify-content: center; !* Horizontally center the content *!*/
+/*  align-items: center; !* Vertically center the content *!*/
+/*  height: 100%; !* Ensure the body takes the full height of its parent *!*/
+/*  text-align: center; !* Center-align text inside the body *!*/
+/*  gap: 1rem; !* Optional: add spacing between elements *!*/
+/*  margin-top: 20px;*/
+/*}*/
 
 
 

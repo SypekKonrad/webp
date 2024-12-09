@@ -1,38 +1,21 @@
-// import React from 'react';
-import { Link } from 'react-router-dom';
-// import './CarData.css';
-// import CarDataReadme from "./CarDataReadme";
 // tu będzie wyswietlona tabelka z rawem
-// export default CarDataRaw;
+import React from 'react';
+import { useCarData } from '../../context/CarDataContext';
 
-import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import './CarData.css';
 
 
-
 const CarDataRaw: React.FC = () => {
-  const [carData, setCarData] = useState<any[]>([]);
+  const { carData, loading, error } = useCarData();
 
-  useEffect(() => {
-    const fetchCarData = async () => {
-      try {
-        const response = await fetch('/api/get_car_data/');
-        const data = await response.json();
-        setCarData(data);
-      } catch (error) {
-        console.error('Error fetching raw data:', error);
-      }
-    };
-
-    fetchCarData();
-  }, []);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="car-data-container">
       <h1>Raw Car Data</h1>
       {carData.length > 0 ? (
-        <table>
+        <table className="car-data-table">
           <thead>
             <tr>
               <th>Date</th>
@@ -46,14 +29,14 @@ const CarDataRaw: React.FC = () => {
               <tr key={index}>
                 <td>{car.Date}</td>
                 <td>{car.Price}</td>
-                <td>{car['Kilometers Traveled']}</td>
+                <td>{car['Kilometers_Traveled']}</td>
                 <td>{car.Liters}</td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <p>No raw data available</p>
+        <p>No data available</p>
       )}
     </div>
   );
