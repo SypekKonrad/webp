@@ -30,20 +30,20 @@ export const CarDataProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
- const fetchCarData = async () => {
+ const fetchCarData = useCallback(async () => {
     setLoading(true); // Set loading to true when starting the request
     setError(null); // Reset any previous errors
     try {
       const response = await httpClient.get('/get_car_data/');  // Using Axios
-      console.log(response.data);  // Log response data if needed
-      setCarData(response.data);  // Set the fetched data into state
+      console.log(response.data);
+      setCarData(response.data);
     } catch (error: any) {
       console.error('Failed to fetch car data:', error);
       setError('Failed to fetch car data. Please try again later.');
     } finally {
-      setLoading(false);  // Stop loading when request completes
+      setLoading(false);
     }
-  };
+ }, []);
 // const fetchCarData = useCallback(async () => {
 //     setLoading(true);
 //     setError(null);

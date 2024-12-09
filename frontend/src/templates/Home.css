@@ -1,13 +1,12 @@
 .body {
-  max-width: 90%; /* Adjust this to control the maximum width */
+  max-width: 90%;
   margin: 20px auto;
-  /*font-family: Arial, sans-serif;*/
   padding: 20px;
   display: flex;
-  justify-content: center; /* Horizontally center the table */
-  align-items: center; /* Vertically center content if necessary */
-  flex-direction: column; /* Stack children elements vertically */
-  width: 100%; /* Ensure the container takes full width */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 h1 {
