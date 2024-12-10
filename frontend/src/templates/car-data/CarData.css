@@ -1,97 +1,90 @@
 /*!*tu będzie tylko formatowanie tekstu*!*/
 
 
-/* Container for the README content */
 .readme-container {
-  max-width: 80%; /* Limit the width to improve readability */
+  max-width: 80%;
   margin: 20px auto;
   padding: 20px;
-  background-color: #f9f9f9; /* Light background for the content */
-  border-radius: 10px; /* Rounded corners for the container */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  text-align: left; /* Align text to the left for better readability */
-  font-family: 'Arial', sans-serif; /* Use a clean, readable font */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  font-family: 'Arial', sans-serif;
 }
 
-/* Main Heading Style */
 h1 {
   color: #333;
   font-size: 2.5em;
   margin-bottom: 20px;
-  font-weight: 600; /* Bold the main heading */
-  text-align: center; /* Center the main title */
+  font-weight: 600;
+  text-align: center;
 }
 
-/* Section Titles (Subheadings) */
 h2 {
   font-size: 1.8em;
   color: #444;
   margin-top: 30px;
   margin-bottom: 10px;
   font-weight: 500;
-  border-bottom: 2px solid #ddd; /* Border under headings for emphasis */
+  border-bottom: 2px solid #ddd;
   padding-bottom: 5px;
-  text-align: center; /* Center align section titles */
+  text-align: center;
 }
 
-/* Paragraph text formatting */
 p {
   font-size: 1.1em;
   color: #555;
-  line-height: 1.6; /* Add space between lines for better readability */
+  line-height: 1.6;
   margin-bottom: 5px;
-  font-weight: 400; /* Regular weight for body text */
-  text-align: justify; /* Justify text for a clean, balanced look */
+  font-weight: 400;
+  text-align: justify;
 }
 
-/* Styled Strong Text (for key points) */
 .readme-container p strong {
-  color: #007bff; /* Blue color for strong text */
-  font-weight: 600; /* Bold the key points */
+  color: #007bff;
+  font-weight: 600;
 }
 
-/* Additional spacing for better readability */
 section {
-  margin-bottom: 40px; /* Add space between sections */
+  margin-bottom: 40px;
 }
 
-/* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
   .readme-container {
-    max-width: 95%; /* Allow container to take full width on small screens */
-    padding: 15px; /* Adjust padding */
+    max-width: 95%;
+    padding: 15px;
   }
 
   h1 {
-    font-size: 2em; /* Reduce heading size for small screens */
+    font-size: 2em;
   }
 
   h2 {
-    font-size: 1.5em; /* Adjust subheading size */
+    font-size: 1.5em;
   }
 
  h3 {
-    font-size: 1.5em; /* Adjust h3 size for smaller screens */
+    font-size: 1.5em;
   }
 
   p {
-    font-size: 1em; /* Adjust font size for readability */
+    font-size: 1em;
   }
 }
 
 
 
-/*.car-data-container {*/
-/*  max-width: 90%; !* Adjust this to control the maximum width *!*/
-/*  margin: 20px auto;*/
-/*  !*font-family: Arial, sans-serif;*!*/
-/*  padding: 20px;*/
-/*  display: flex;*/
-/*  justify-content: center; !* Horizontally center the table *!*/
-/*  align-items: center; !* Vertically center content if necessary *!*/
-/*  flex-direction: column; !* Stack children elements vertically *!*/
-/*  width: 100%; !* Ensure the container takes full width *!*/
-/*}*/
+.car-data-container {
+  max-width: 90%; /* Adjust this to control the maximum width */
+  margin: 20px auto;
+  /*font-family: Arial, sans-serif;*/
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Horizontally center the table */
+  align-items: center; /* Vertically center content if necessary */
+  flex-direction: column; /* Stack children elements vertically */
+  width: 100%; /* Ensure the container takes full width */
+}
 
 /*h1 {*/
 /*  text-align: center;*/
@@ -99,46 +92,46 @@ section {
 /*  font-size: 2em;*/
 /*}*/
 
-/*.car-data-table {*/
-/*  width: 100%;*/
-/*  border-collapse: collapse;*/
-/*  margin-top: 20px;*/
-/*  text-align: center;*/
-/*}*/
+.car-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  text-align: center;
+}
 
-/*.car-data-table th,*/
-/*.car-data-table td {*/
-/*  padding: 12px 15px;*/
-/*  border: 1px solid #ddd;*/
-/*}*/
+.car-data-table th,
+.car-data-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
 
-/*.car-data-table th {*/
-/*  background-color: #f4f4f4;*/
-/*  font-weight: bold;*/
-/*}*/
+.car-data-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
 
-/*.car-data-table tr:nth-child(even) {*/
-/*  background-color: #f9f9f9;*/
-/*}*/
+.car-data-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-/*.car-data-table tr:hover {*/
-/*  background-color: #f1f1f1;*/
-/*}*/
+.car-data-table tr:hover {
+  background-color: #f1f1f1;
+}
 
-/*.car-data-table td {*/
-/*  font-size: 1.1em;*/
-/*  color: #555;*/
-/*}*/
+.car-data-table td {
+  font-size: 1.1em;
+  color: #555;
+}
 
-/*@media (max-width: 768px) {*/
-/*  .car-data-table th,*/
-/*  .car-data-table td {*/
-/*    padding: 10px 15px;*/
-/*  }*/
+@media (max-width: 768px) {
+  .car-data-table th,
+  .car-data-table td {
+    padding: 10px 15px;
+  }
 
-/*  h1 {*/
-/*    font-size: 1.5em;*/
-/*  }*/
-/*}*/
+  h1 {
+    font-size: 1.5em;
+  }
+}
 
 
