@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';import './CarData.css';
+import React, { useEffect } from 'react';
+import './CarData.css';
 import { useCarData } from '../../context/CarDataContext';
 const CarDataReadme: React.FC = () => {
     const { fetchCarData } = useCarData();

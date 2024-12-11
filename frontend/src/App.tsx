@@ -6,6 +6,7 @@ import { CarDataProvider } from './context/CarDataContext';
 import Home from './templates/Home';
 import CarDataReadme from './templates/car-data/CarDataReadme';
 import CarDataRaw from './templates/car-data/CarDataRaw';
+import CarDataAnalysis from "./templates/car-data/CarDataAnalysis";
 
 import './App.css';
 
@@ -43,6 +44,7 @@ const CarDataRoutes: React.FC = () => {
     <Routes>
       <Route path="" element={<CarDataReadme />} />
       <Route path="raw" element={<CarDataRaw />} />
+      <Route path="analysis" element={<CarDataAnalysis />} />
     </Routes>
   );
 };

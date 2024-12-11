@@ -16,7 +16,6 @@ SCOPES = [
 
 class GetCarData(APIView):
 
-
     def get(self, request, format=None):
         try:
             # print("api call")
@@ -54,4 +53,64 @@ class GetCarData(APIView):
             return Response({"data": serializer.data}, status=status.HTTP_200_OK)
         except Exception as e:
             # print(f"Error: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class AnalyzeCarData(APIView):
+    def get(self, request, format=None):
+        try:
+            response = GetCarData().get(request)
+            if response.status_code != 200:
+                return Response({"error": "Failed to fetch raw data"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            raw_data = response.data['data']
+            df = pd.DataFrame(raw_data)
+
+            # Convert columns to appropriate data types
+            df['Date'] = pd.to_datetime(df['Date'], format='%d.%m.%Y')
+            df['Price'] = df['Price'].astype(float)
+            df['Kilometers_Traveled'] = df['Kilometers_Traveled'].astype(float)
+            df['Liters'] = df['Liters'].astype(float)
+
+            # Calculate derived metrics
+            df['Fuel Efficiency (km/L)'] = df['Kilometers_Traveled'] / df['Liters']
+            df['Total Expenditure'] = df['Price'] * df['Liters']
+            df['Price per km'] = df['Total Expenditure'] / df['Kilometers_Traveled']
+            df['Fuel consumption (L/100km)'] = (df['Liters'] / df['Kilometers_Traveled']) * 100
+
+            # Assign seasons based on months
+            def assign_season(month):
+                if month in [12, 1, 2]:
+                    return 'Winter'
+                elif month in [3, 4, 5]:
+                    return 'Spring'
+                elif month in [6, 7, 8]:
+                    return 'Summer'
+                else:
+                    return 'Autumn'
+
+            df['Season'] = df['Date'].dt.month.apply(assign_season)
+
+            # Perform seasonal analysis
+            seasonal_analysis = df.groupby('Season').agg({
+                'Fuel consumption (L/100km)': 'mean',
+                'Fuel Efficiency (km/L)': 'mean'
+            }).round(2).reset_index()
+
+            # Calculate summary statistics
+            total_expenditure = df['Total Expenditure'].sum()
+            average_expenditure_per_refueling = df['Total Expenditure'].mean()
+            average_price_per_km = df['Price per km'].mean()
+            average_fuel_consumption = df['Fuel consumption (L/100km)'].mean()
+
+            # Prepare response data
+            analysis_results = {
+                'total_expenditure': round(total_expenditure, 2),
+                'average_expenditure_per_refueling': round(average_expenditure_per_refueling, 2),
+                'average_price_per_km': round(average_price_per_km, 2),
+                'average_fuel_consumption': round(average_fuel_consumption, 2),
+                'seasonal_analysis': seasonal_analysis.to_dict(orient='records'),
+            }
+
+            return Response({"analysis": "analysis_results"}, status=status.HTTP_200_OK)
+        except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
