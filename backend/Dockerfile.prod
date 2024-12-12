@@ -1,60 +1,44 @@
-# builder
-FROM python:3.12-alpine as builder
-
-WORKDIR /app
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-# install system dependencies
-
-RUN apk add --no-cache libpq-dev gcc musl-dev
-
-
-
-# python dependencies
-COPY requirements.txt /app/requirements.txt
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r /app/requirements.txt
-
-# final
 FROM python:3.12-alpine
 
-RUN mkdir /app
+# Set working directory
+WORKDIR /app
 
-# create the app user
-#RUN addgroup --system app && adduser --system --group app
-RUN addgroup app && adduser -S -G app app
+# Create the app user and group with explicit IDs
+RUN addgroup -g 1001 app && adduser -u 1001 -G app -S app
 
-# env
-ENV HOME=/app
+# Verify creation
+RUN cat /etc/passwd && cat /etc/group
+
+# Environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 ENV APP_HOME=/app/backend
-RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/staticfiles
-RUN mkdir $APP_HOME/mediafiles
-WORKDIR $APP_HOME
 
-# install dependencies
-#RUN apt-get update && apt-get install -y --no-install-recommends netcat-openbsd
-RUN apk add --no-cache libpq-dev gcc musl-dev
+# Create necessary directories
+RUN mkdir -p $APP_HOME/staticfiles $APP_HOME/mediafiles
 
-COPY --from=builder /usr/src/app/wheels /wheels
-COPY --from=builder /app/requirements.txt .
+# Install system dependencies
+RUN apk update && apk add --no-cache libpq-dev gcc musl-dev
+
+# Install Python dependencies
+COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip
-RUN pip install --no-cache /wheels/*
+RUN pip install -r /app/requirements.txt
+RUN pip install gunicorn
 
-# copy entrypoint.prod.sh
-COPY ./entrypoint.prod.sh .
-RUN sed -i 's/\r$//g'  $APP_HOME/entrypoint.prod.sh
-RUN chmod +x  $APP_HOME/entrypoint.prod.sh
+# Copy entrypoint script
+COPY ./entrypoint.prod.sh $APP_HOME/entrypoint.prod.sh
+RUN sed -i 's/\r$//g' $APP_HOME/entrypoint.prod.sh
+RUN chmod +x $APP_HOME/entrypoint.prod.sh
 
-# copy project
+# Copy project files
 COPY . $APP_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $APP_HOME
+# Assign ownership to the app user and group
+RUN chown -R 1001:1001 $APP_HOME
 
-# change to the app user
+# Switch to the app user
 USER app
 
-# run entrypoint.prod.sh
+# Run the entrypoint script
 ENTRYPOINT ["/app/backend/entrypoint.prod.sh"]

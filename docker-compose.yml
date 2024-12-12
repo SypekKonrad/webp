@@ -21,7 +21,8 @@ services:
 
   frontend:
     build: ./frontend
-    command: npm start
+#    command: npm start
+    command: sh -c "npm i && npx tsc && npm start"
     volumes:
       - ./frontend:/app
       - /app/node_modules
