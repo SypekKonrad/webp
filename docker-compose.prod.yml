@@ -28,6 +28,7 @@ services:
   nginx:
     build: ./nginx
     volumes:
+      - ./frontend/build:/app/frontend/build
       - static_volume:/app/backend/staticfiles
       - media_volume:/app/backend/mediafiles
     ports:

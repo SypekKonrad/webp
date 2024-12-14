@@ -5,7 +5,9 @@ from google.oauth2.service_account import Credentials
 import gspread
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from rest_framework import status
+from io import BytesIO
 
 # Google Sheets auth
 SERVICE_ACCOUNT_FILE = 'toyota-avensis-441923-f7a47164daac.json'
@@ -111,6 +113,29 @@ class AnalyzeCarData(APIView):
                 'seasonal_analysis': seasonal_analysis.to_dict(orient='records'),
             }
 
-            return Response({"analysis": "analysis_results"}, status=status.HTTP_200_OK)
+            # plt.style.use('seaborn-v0_8-darkgrid')
+            # plt.figure(figsize=(14, 7))
+            # plt.plot(df['Date'], df['Fuel consumption (L/100km)'], marker='o', label='Fuel Consumption (L/100km)', color='b')
+            # plt.axhline(y=average_fuel_consumption, color='r', linestyle='--', label=f'Average: {average_fuel_consumption:.2f} L/100km')
+            # plt.title("Fuel consumption Over Time", fontsize=16)
+            # plt.xlabel("Date", fontsize=14)
+            # plt.ylabel("Fuel consumption (L/100km)", fontsize=14)
+            # plt.legend(fontsize=12)
+            # plt.xticks(rotation=45)
+            # plt.tight_layout()
+            #
+            # # Save the plot to a BytesIO object
+            # img_io = BytesIO()
+            # plt.savefig(img_io, format='png')
+            # img_io.seek(0)
+            # plt.close()
+            #
+            # # Convert plot to base64 (optional, if you prefer to send it as a base64 string)
+            # plot_image = img_io.getvalue()
+
+            return Response({
+                "analysis": analysis_results,
+                # "plot_image": plot_image
+            }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

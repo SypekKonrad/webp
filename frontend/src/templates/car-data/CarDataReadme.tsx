@@ -41,7 +41,7 @@ const CarDataReadme: React.FC = () => {
         <h3>Frontend</h3>
         <p><strong>React:</strong> Interactive and responsive UI.</p>
         <p><strong>Axios:</strong> For seamless API communication.</p>
-        <p><strong>Chart.js/D3.js:</strong> For engaging data visualizations.</p>
+        <p><strong>Recharts:</strong> For engaging data visualizations.</p>
 
         <h3>Backend</h3>
         <p><strong>Python:</strong> Core data processing and analysis.</p>
@@ -53,7 +53,7 @@ const CarDataReadme: React.FC = () => {
         <p><strong>Google Sheets:</strong> A lightweight, real-time database for storing refueling logs.</p>
 
         <h3>Deployment</h3>
-        <p><strong>AWS:</strong> Hosting and deployment (subject to final setup).</p>
+        <p><strong>AWS:</strong> Hosting and deployment.</p>
       </section>
 
       <section className="insights">

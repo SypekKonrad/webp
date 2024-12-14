@@ -52,7 +52,15 @@ export const useAnalysisData = () => {
 };
 
 export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null);
+  // Initialize analysisData state with default values
+  const [analysisData, setAnalysisData] = useState<AnalysisData>({
+    total_expenditure: 0,
+    average_expenditure_per_refueling: 0,
+    average_price_per_km: 0,
+    average_fuel_consumption: 0,
+    seasonal_analysis: [], // Ensure it's always defined
+  });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -61,7 +69,14 @@ export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }
     setError(null);
     try {
       const response = await httpClient.get('/analyze_car_data/');
-      setAnalysisData(response.data.analysis);
+      const analysis = response.data.analysis || {};
+      setAnalysisData({
+        total_expenditure: analysis.total_expenditure || 0,
+        average_expenditure_per_refueling: analysis.average_expenditure_per_refueling || 0,
+        average_price_per_km: analysis.average_price_per_km || 0,
+        average_fuel_consumption: analysis.average_fuel_consumption || 0,
+        seasonal_analysis: analysis.seasonal_analysis || [], // Fallback to empty array
+      });
     } catch (error: any) {
       console.error('Failed to fetch analysis data:', error);
       setError('Failed to fetch analysis data. Please try again later.');

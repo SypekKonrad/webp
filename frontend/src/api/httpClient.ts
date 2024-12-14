@@ -8,7 +8,7 @@ if (window.location.hostname === 'localhost') {
 } else if (window.location.hostname === 'konradsypek.xyz') {
   baseURL = 'http://konradsypek.xyz/api';
 } else if (window.location.hostname === '3.120.128.190') {
-  baseURL = 'http://3.78.229.131/api';
+  baseURL = 'http://3.78.229.131:1337/api';
 } else if (window.location.hostname === '0.0.0.0') {
   baseURL = 'http://localhost:1337/api';
 } else {
