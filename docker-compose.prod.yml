@@ -27,14 +27,25 @@ services:
 
   nginx:
     build: ./nginx
+    restart: always
     volumes:
       - ./frontend/build:/app/frontend/build
       - static_volume:/app/backend/staticfiles
       - media_volume:/app/backend/mediafiles
+      - ./certbot/www/:/var/www/certbot/
+      - ./certbot/conf/:/etc/letsencrypt/
+
     ports:
       - 1337:80
+      - 443:443
     depends_on:
       - backend
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/
+      - ./certbot/conf/:/etc/letsencrypt/
 
 volumes:
   postgres_data:
