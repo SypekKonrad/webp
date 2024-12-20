@@ -1,3 +1,5 @@
+import base64
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import CarDataSerializer
@@ -113,29 +115,112 @@ class AnalyzeCarData(APIView):
                 'seasonal_analysis': seasonal_analysis.to_dict(orient='records'),
             }
 
-            # plt.style.use('seaborn-v0_8-darkgrid')
-            # plt.figure(figsize=(14, 7))
-            # plt.plot(df['Date'], df['Fuel consumption (L/100km)'], marker='o', label='Fuel Consumption (L/100km)', color='b')
-            # plt.axhline(y=average_fuel_consumption, color='r', linestyle='--', label=f'Average: {average_fuel_consumption:.2f} L/100km')
-            # plt.title("Fuel consumption Over Time", fontsize=16)
-            # plt.xlabel("Date", fontsize=14)
-            # plt.ylabel("Fuel consumption (L/100km)", fontsize=14)
-            # plt.legend(fontsize=12)
-            # plt.xticks(rotation=45)
-            # plt.tight_layout()
-            #
-            # # Save the plot to a BytesIO object
-            # img_io = BytesIO()
-            # plt.savefig(img_io, format='png')
-            # img_io.seek(0)
-            # plt.close()
-            #
-            # # Convert plot to base64 (optional, if you prefer to send it as a base64 string)
-            # plot_image = img_io.getvalue()
+            # style of grid
+            plt.style.use('seaborn-v0_8-darkgrid')
+
+            # plot1 / fuel consump. over time plot
+            plt.figure(figsize=(14, 7))
+            plt.plot(df['Date'], df['Fuel consumption (L/100km)'], marker='o', label='Fuel Consumption (L/100km)', color='b')
+            plt.axhline(y=average_fuel_consumption, color='r', linestyle='--', label=f'Average: {average_fuel_consumption:.2f} L/100km')
+            plt.title("Fuel consumption Over Time", fontsize=16)
+            plt.xlabel("Date", fontsize=14)
+            plt.ylabel("Fuel consumption (L/100km)", fontsize=14)
+            plt.legend(fontsize=12)
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            # bytes / plot1
+            img_io = BytesIO()
+            plt.savefig(img_io, format='png')
+            img_io.seek(0)
+            plt.close()
+            plot1_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+            # plot2 / liters consumed vs. kilometers traveled
+
+            plt.figure(figsize=(10, 6))
+
+            # bez _ w Kilometers Trabeled - default
+            # z _ nowa wersja ktora siem oze nie wywali
+
+            # plt.scatter(df['Kilometers Traveled'], df['Liters'], alpha=0.7, c='g', edgecolors='k', label='Data Points')
+            plt.scatter(df['Kilometers_Traveled'], df['Liters'], alpha=0.7, c='g', edgecolors='k', label='Data Points')
+            # z = np.polyfit(df['Kilometers Traveled'], df['Liters'], 1)
+            z = np.polyfit(df['Kilometers_Traveled'], df['Liters'], 1)
+            p = np.poly1d(z)
+            # plt.plot(df['Kilometers Traveled'], p(df['Kilometers Traveled']), "r--", label='Trend Line')
+            plt.plot(df['Kilometers_Traveled'], p(df['Kilometers_Traveled']), "r--", label='Trend Line')
+            plt.title("Liters Consumed vs. Kilometers Traveled", fontsize=16)
+            plt.xlabel("Kilometers Traveled", fontsize=14)
+            plt.ylabel("Liters Consumed", fontsize=14)
+            plt.legend(fontsize=12)
+            plt.grid(True)
+            plt.tight_layout()
+            # bytes / plot2
+            img_io = BytesIO()
+            plt.savefig(img_io, format='png')
+            img_io.seek(0)
+            plt.close()
+            plot2_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+            # plot 3 / Fuel Price Trends Over Time
+            plt.figure(figsize=(14, 7))
+            plt.plot(df['Date'], df['Price'], marker='o', label='Fuel Price (per Liter)', color='b')
+            plt.title("Fuel Price Over Time", fontsize=16)
+            plt.xlabel("Date", fontsize=14)
+            plt.ylabel("Fuel Price (PLN per Liter)", fontsize=14)
+            plt.legend(fontsize=12)
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            # bytes / plot3
+            img_io = BytesIO()
+            plt.savefig(img_io, format='png')
+            img_io.seek(0)
+            plt.close()
+            plot3_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+            # plot 4 / Price per Kilometer
+            plt.figure(figsize=(14, 7))
+            plt.plot(df['Date'], df['Price per km'], marker='o', label='Price per km', color='purple')
+            plt.axhline(y=average_price_per_km, color='r', linestyle='--',
+                        label=f'Average Price per km: {average_price_per_km:.2f} PLN')
+            plt.title("Price per Kilometer Over Time", fontsize=16)
+            plt.xlabel("Date", fontsize=14)
+            plt.ylabel("Price per Kilometer (PLN)", fontsize=14)
+            plt.legend(fontsize=12)
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            # bytes / plot4
+            img_io = BytesIO()
+            plt.savefig(img_io, format='png')
+            img_io.seek(0)
+            plt.close()
+            plot4_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+            # plot5 / Seasonal Comparison of Fuel Consumption and Efficiency
+            fig, axes = plt.subplots(1, 2, figsize=(14, 7))
+            axes[0].bar(seasonal_analysis['Season'], seasonal_analysis['Fuel consumption (L/100km)'], color='b',alpha=0.7)
+            axes[0].set_title("Average Fuel Consumption by Season (L/100km)", fontsize=16)
+            axes[0].set_xlabel("Season", fontsize=14)
+            axes[0].set_ylabel("Fuel Consumption (L/100km)", fontsize=14)
+            axes[1].bar(seasonal_analysis['Season'], seasonal_analysis['Fuel Efficiency (km/L)'], color='g', alpha=0.7)
+            axes[1].set_title("Average Fuel Efficiency by Season (km/L)", fontsize=16)
+            axes[1].set_xlabel("Season", fontsize=14)
+            axes[1].set_ylabel("Fuel Efficiency (km/L)", fontsize=14)
+            plt.tight_layout()
+            # bytes / plot5
+            img_io = BytesIO()
+            plt.savefig(img_io, format='png')
+            img_io.seek(0)
+            plt.close()
+            plot5_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
 
             return Response({
                 "analysis": analysis_results,
-                # "plot_image": plot_image
+                "plot1_image": plot1_image,
+                "plot2_image": plot2_image,
+                "plot3_image": plot3_image,
+                "plot4_image": plot4_image,
+                "plot5_image": plot5_image,
             }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
