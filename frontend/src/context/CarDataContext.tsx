@@ -32,6 +32,11 @@ interface AnalysisData {
   average_price_per_km: number;
   average_fuel_consumption: number;
   seasonal_analysis: SeasonalAnalysis[];
+  plot1_image: string;
+  plot2_image: string;
+  plot3_image: string;
+  plot4_image: string;
+  plot5_image: string;
 }
 
 interface AnalysisContextType {
@@ -52,15 +57,7 @@ export const useAnalysisData = () => {
 };
 
 export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Initialize analysisData state with default values
-  const [analysisData, setAnalysisData] = useState<AnalysisData>({
-    total_expenditure: 0,
-    average_expenditure_per_refueling: 0,
-    average_price_per_km: 0,
-    average_fuel_consumption: 0,
-    seasonal_analysis: [], // Ensure it's always defined
-  });
-
+  const [analysisData, setAnalysisData] = useState<AnalysisData | null>(null); // Allow null initially
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,12 +67,23 @@ export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }
     try {
       const response = await httpClient.get('/analyze_car_data/');
       const analysis = response.data.analysis || {};
+      const plot1Image = response.data.plot1_image || ''; // Handle plot_image
+      const plot2Image = response.data.plot2_image || ''; // Handle plot_image
+      const plot3Image = response.data.plot3_image || ''; // Handle plot_image
+      const plot4Image = response.data.plot4_image || ''; // Handle plot_image
+      const plot5Image = response.data.plot5_image || ''; // Handle plot_image
+
       setAnalysisData({
         total_expenditure: analysis.total_expenditure || 0,
         average_expenditure_per_refueling: analysis.average_expenditure_per_refueling || 0,
         average_price_per_km: analysis.average_price_per_km || 0,
         average_fuel_consumption: analysis.average_fuel_consumption || 0,
-        seasonal_analysis: analysis.seasonal_analysis || [], // Fallback to empty array
+        seasonal_analysis: analysis.seasonal_analysis || [],
+        plot1_image: plot1Image,
+        plot2_image: plot2Image,
+        plot3_image: plot3Image,
+        plot4_image: plot4Image,
+        plot5_image: plot5Image,
       });
     } catch (error: any) {
       console.error('Failed to fetch analysis data:', error);
@@ -135,28 +143,3 @@ const fetchCarData = useCallback(async () => {
   );
 };
 
-
-
-
-// const fetchCarData = useCallback(async () => {
-//     setLoading(true);
-//     setError(null);
-//     try {
-//         // przekazac w react zeby requesty szly na backend
-//         const response = await fetch('http://localhost:8000/api/get_car_data/');
-//         console.log('Raw response:', response);
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch car data');
-//         }
-//
-//         const data = await response.json();
-//         console.log('Raw response text:', data);
-//
-//         setCarData(data.data);
-//     } catch (err) {
-//         console.error('Error occurred:', err);
-//         setError(err instanceof Error ? err.message : 'Unknown error');
-//     } finally {
-//         setLoading(false);
-//     }
-// }, []);

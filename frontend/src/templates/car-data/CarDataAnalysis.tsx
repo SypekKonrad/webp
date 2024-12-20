@@ -13,21 +13,9 @@ import { useAnalysisData } from '../../context/CarDataContext';
 
 const CarDataVisualization: React.FC = () => {
   const { analysisData, loading, error } = useAnalysisData();
-  const [plotImage, setPlotImage] = useState<string | null>(null);
+  // const [plotImage, setPlotImage] = useState<string | null>(null);
 
-  // Fetch the plot image
-useEffect(() => {
-  fetch('/api/analyze-car-data/')
-    .then((response) => response.json())
-    .then((data) => {
-      // Assuming the API returns the base64 image string directly
-      const base64Image = data.plot_image;
-      setPlotImage(`data:image/png;base64,${base64Image}`);
-    })
-    .catch((error) => {
-      console.error('Error fetching the plot image:', error);
-    });
-}, []);
+
 
   if (loading) return <p>Loading analysis data...</p>;
   if (error) return <p>{error}</p>;
@@ -68,14 +56,66 @@ return (
         </ul>
       </p>
             {/* Plot Image */}
-      <div className="fuel-consumption-plot">
-        <h3>Fuel Consumption Over Time</h3>
-        {plotImage ? (
-          <img src={plotImage} alt="Fuel Consumption Over Time" width="100%" />
+    <h3>Fuel Consumption Over Time</h3>
+      {analysisData?.plot1_image ? (
+          <img
+            src={`data:image/png;base64,${analysisData.plot1_image}`}
+            alt="Analysis Plot"
+            style={{ maxWidth: '100%' }}
+          />
         ) : (
-          <p>Loading fuel consumption plot...</p>
+          <p>Loading Fuel Consumption Over Time plot...</p>
         )}
-      </div>
+
+    <h3>Fuel Consumption Over Time</h3>
+      {analysisData?.plot2_image ? (
+          <img
+            src={`data:image/png;base64,${analysisData.plot2_image}`}
+            alt="Analysis Plot"
+            style={{ maxWidth: '100%' }}
+          />
+        ) : (
+          <p>Loading Fuel Consumption Over Time plot...</p>
+        )}
+
+    <h3>Fuel Consumption Over Time</h3>
+      {analysisData?.plot3_image ? (
+          <img
+            src={`data:image/png;base64,${analysisData.plot3_image}`}
+            alt="Analysis Plot"
+            style={{ maxWidth: '100%' }}
+          />
+        ) : (
+          <p>Loading Fuel Consumption Over Time plot...</p>
+        )}
+
+    <h3>Fuel Consumption Over Time</h3>
+      {analysisData?.plot4_image ? (
+          <img
+            src={`data:image/png;base64,${analysisData.plot4_image}`}
+            alt="Analysis Plot"
+            style={{ maxWidth: '100%' }}
+          />
+        ) : (
+          <p>Loading Fuel Consumption Over Time plot...</p>
+        )}
+
+    <h3>Fuel Consumption Over Time</h3>
+      {analysisData?.plot5_image ? (
+          <img
+            src={`data:image/png;base64,${analysisData.plot5_image}`}
+            alt="Analysis Plot"
+            style={{ maxWidth: '100%' }}
+          />
+        ) : (
+          <p>Loading Fuel Consumption Over Time plot...</p>
+        )}
+
+
+        <p>Total Expenditure: {analysisData?.total_expenditure || 'Loading...'}</p>
+        <p>Average Expenditure per Refueling: {analysisData?.average_expenditure_per_refueling || 'Loading...'}</p>
+        <p>Average Price per KM: {analysisData?.average_price_per_km || 'Loading...'}</p>
+        <p>Average Fuel Consumption: {analysisData?.average_fuel_consumption || 'Loading...'}</p>
       <p>
         <strong>Seasonal Analysis of Fuel Consumption and Efficiency</strong>
       </p>
@@ -84,60 +124,7 @@ return (
       </p>
     </div>
 
-    <div className="chart-container">
-      {/* Fuel Price Over Time */}
-      {fuelPriceData.length > 0 ? (
-        <LineChart
-          width={600}
-          height={300}
-          data={fuelPriceData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="Fuel Consumption (L/100km)"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line
-            type="monotone"
-            dataKey="Fuel Efficiency (km/L)"
-            stroke="#82ca9d"
-          />
-        </LineChart>
-      ) : (
-        <p>No seasonal data available.</p>
-      )}
 
-      {/* Price per Kilometer */}
-      {priceData.length > 0 ? (
-        <LineChart
-          width={600}
-          height={300}
-          data={priceData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="Price per km"
-            stroke="#ff7300"
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
-      ) : (
-        <p>No price data available.</p>
-      )}
-    </div>
 
     <div className="summary-stats">
       <h3>Summary Statistics</h3>
