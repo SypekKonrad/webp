@@ -41,7 +41,7 @@ const CarDataReadme: React.FC = () => {
         <h3>Frontend</h3>
         <p><strong>React:</strong> Interactive and responsive UI.</p>
         <p><strong>Axios:</strong> For seamless API communication.</p>
-        <p><strong>Recharts:</strong> For engaging data visualizations.</p>
+        <p><strong>Matplotlib:</strong> Data Visualization.</p>
 
         <h3>Backend</h3>
         <p><strong>Python:</strong> Core data processing and analysis.</p>
@@ -68,7 +68,7 @@ const CarDataReadme: React.FC = () => {
         <h2>🚀 How It Works</h2>
         <p><strong>Data Collection:</strong> Logs stored in Google Sheets capture details like date, cost, kilometers traveled, and liters filled.</p>
         <p><strong>Backend API:</strong> A Django-based API processes and structures the raw data.</p>
-        <p><strong>Frontend Display:</strong> React fetches the processed data and visualizes it through interactive charts.</p>
+        <p><strong>Frontend Display:</strong> React fetches the processed data and visualizes it through charts.</p>
       </section>
 
       <section className="conclusion">
