@@ -1,5 +1,5 @@
 import base64
-
+from PIL import Image
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import CarDataSerializer
@@ -119,7 +119,9 @@ class AnalyzeCarData(APIView):
             plt.style.use('seaborn-v0_8-darkgrid')
 
             # plot1 / fuel consump. over time plot
-            plt.figure(figsize=(14, 7))
+
+
+            plt.figure(figsize=(10, 6))
             plt.plot(df['Date'], df['Fuel consumption (L/100km)'], marker='o', label='Fuel Consumption (L/100km)', color='b')
             plt.axhline(y=average_fuel_consumption, color='r', linestyle='--', label=f'Average: {average_fuel_consumption:.2f} L/100km')
             plt.title("Fuel consumption Over Time", fontsize=16)
@@ -129,11 +131,26 @@ class AnalyzeCarData(APIView):
             plt.xticks(rotation=45)
             plt.tight_layout()
             # bytes / plot1
-            img_io = BytesIO()
-            plt.savefig(img_io, format='png')
-            img_io.seek(0)
+            # img1_io = BytesIO()
+            # plt.savefig(img1_io, format='png')
+            # img1_io.seek(0)
+            # plt.close()
+            # plot1_image = base64.b64encode(img1_io.getvalue()).decode('utf-8')
+
+            img1_io = BytesIO()
+            plt.savefig(img1_io, format='png', dpi=100)  # Adjust dpi for desired resolution
+            img1_io.seek(0)
+
+            # Use Pillow to compress the image
+            compressed_io1 = BytesIO()
+            with Image.open(img1_io) as img:
+                img.save(compressed_io1, format='PNG', optimize=True, quality=85)  # Adjust quality for compression
+            compressed_io1.seek(0)
+
+            # Encode the compressed image
+            plot1_image = base64.b64encode(compressed_io1.getvalue()).decode('utf-8')
             plt.close()
-            plot1_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
 
             # plot2 / liters consumed vs. kilometers traveled
 
@@ -156,14 +173,31 @@ class AnalyzeCarData(APIView):
             plt.grid(True)
             plt.tight_layout()
             # bytes / plot2
-            img_io = BytesIO()
-            plt.savefig(img_io, format='png')
-            img_io.seek(0)
+            # img_io2 = BytesIO()
+            # plt.savefig(img_io2, format='svg')
+            # img_io2.seek(0)
+            # plt.close()
+            # plot2_image = base64.b64encode(img_io2.getvalue()).decode('utf-8')
+
+            img2_io = BytesIO()
+            plt.savefig(img2_io, format='png', dpi=100)  # Adjust dpi for desired resolution
+            img2_io.seek(0)
+
+            # Use Pillow to compress the image
+            compressed_io2 = BytesIO()
+            with Image.open(img2_io) as img:
+                img.save(compressed_io2, format='PNG', optimize=True, quality=85)  # Adjust quality for compression
+            compressed_io2.seek(0)
+
+            # Encode the compressed image
+            plot2_image = base64.b64encode(compressed_io2.getvalue()).decode('utf-8')
             plt.close()
-            plot2_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+
+
 
             # plot 3 / Fuel Price Trends Over Time
-            plt.figure(figsize=(14, 7))
+            plt.figure(figsize=(10, 6))
             plt.plot(df['Date'], df['Price'], marker='o', label='Fuel Price (per Liter)', color='b')
             plt.title("Fuel Price Over Time", fontsize=16)
             plt.xlabel("Date", fontsize=14)
@@ -172,14 +206,29 @@ class AnalyzeCarData(APIView):
             plt.xticks(rotation=45)
             plt.tight_layout()
             # bytes / plot3
-            img_io = BytesIO()
-            plt.savefig(img_io, format='png')
-            img_io.seek(0)
+            # img3_io = BytesIO()
+            # plt.savefig(img3_io, format='svg')
+            # img3_io.seek(0)
+            # plt.close()
+            # plot3_image = base64.b64encode(img3_io.getvalue()).decode('utf-8')
+
+            img3_io = BytesIO()
+            plt.savefig(img3_io, format='png', dpi=100)  # Adjust dpi for desired resolution
+            img3_io.seek(0)
+
+            # Use Pillow to compress the image
+            compressed_io3 = BytesIO()
+            with Image.open(img3_io) as img:
+                img.save(compressed_io3, format='PNG', optimize=True, quality=85)  # Adjust quality for compression
+            compressed_io3.seek(0)
+
+            # Encode the compressed image
+            plot3_image = base64.b64encode(compressed_io3.getvalue()).decode('utf-8')
             plt.close()
-            plot3_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
 
             # plot 4 / Price per Kilometer
-            plt.figure(figsize=(14, 7))
+            plt.figure(figsize=(10, 6))
             plt.plot(df['Date'], df['Price per km'], marker='o', label='Price per km', color='purple')
             plt.axhline(y=average_price_per_km, color='r', linestyle='--',
                         label=f'Average Price per km: {average_price_per_km:.2f} PLN')
@@ -190,29 +239,60 @@ class AnalyzeCarData(APIView):
             plt.xticks(rotation=45)
             plt.tight_layout()
             # bytes / plot4
-            img_io = BytesIO()
-            plt.savefig(img_io, format='png')
-            img_io.seek(0)
+            # img_io4 = BytesIO()
+            # plt.savefig(img_io4, format='svg')
+            # img_io4.seek(0)
+            # plt.close()
+            # plot4_image = base64.b64encode(img_io4.getvalue()).decode('utf-8')
+
+            img4_io = BytesIO()
+            plt.savefig(img4_io, format='png', dpi=100)  # Adjust dpi for desired resolution
+            img4_io.seek(0)
+
+            # Use Pillow to compress the image
+            compressed_io4 = BytesIO()
+            with Image.open(img4_io) as img:
+                img.save(compressed_io4, format='PNG', optimize=True, quality=85)  # Adjust quality for compression
+            compressed_io4.seek(0)
+
+            # Encode the compressed image
+            plot4_image = base64.b64encode(compressed_io4.getvalue()).decode('utf-8')
             plt.close()
-            plot4_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
 
             # plot5 / Seasonal Comparison of Fuel Consumption and Efficiency
-            fig, axes = plt.subplots(1, 2, figsize=(14, 7))
+            fig, axes = plt.subplots(1, 2, figsize=(10, 6))
             axes[0].bar(seasonal_analysis['Season'], seasonal_analysis['Fuel consumption (L/100km)'], color='b',alpha=0.7)
-            axes[0].set_title("Average Fuel Consumption by Season (L/100km)", fontsize=16)
-            axes[0].set_xlabel("Season", fontsize=14)
-            axes[0].set_ylabel("Fuel Consumption (L/100km)", fontsize=14)
+            axes[0].set_title("Average Fuel Consumption by Season (L/100km)", fontsize=14)
+            axes[0].set_xlabel("Season", fontsize=13)
+            axes[0].set_ylabel("Fuel Consumption (L/100km)", fontsize=13)
             axes[1].bar(seasonal_analysis['Season'], seasonal_analysis['Fuel Efficiency (km/L)'], color='g', alpha=0.7)
-            axes[1].set_title("Average Fuel Efficiency by Season (km/L)", fontsize=16)
-            axes[1].set_xlabel("Season", fontsize=14)
-            axes[1].set_ylabel("Fuel Efficiency (km/L)", fontsize=14)
+            axes[1].set_title("Average Fuel Efficiency by Season (km/L)", fontsize=14)
+            axes[1].set_xlabel("Season", fontsize=13)
+            axes[1].set_ylabel("Fuel Efficiency (km/L)", fontsize=13)
             plt.tight_layout()
-            # bytes / plot5
-            img_io = BytesIO()
-            plt.savefig(img_io, format='png')
-            img_io.seek(0)
+
+
+            img5_io = BytesIO()
+            plt.savefig(img5_io, format='png', dpi=100)  # Adjust dpi for desired resolution
+            img5_io.seek(0)
+
+            # Use Pillow to compress the image
+            compressed_io5 = BytesIO()
+            with Image.open(img5_io) as img:
+                img.save(compressed_io5, format='PNG', optimize=True, quality=85)  # Adjust quality for compression
+            compressed_io5.seek(0)
+
+            # Encode the compressed image
+            plot5_image = base64.b64encode(compressed_io5.getvalue()).decode('utf-8')
             plt.close()
-            plot5_image = base64.b64encode(img_io.getvalue()).decode('utf-8')
+
+            # bytes / plot5
+            # img_io5 = BytesIO()
+            # plt.savefig(img_io5, format='svg')
+            # img_io5.seek(0)
+            # plt.close()
+            # plot5_image = base64.b64encode(img_io5.getvalue()).decode('utf-8')
 
             return Response({
                 "analysis": analysis_results,
