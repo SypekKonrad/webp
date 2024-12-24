@@ -31,6 +31,8 @@ interface AnalysisData {
   average_expenditure_per_refueling: number;
   average_price_per_km: number;
   average_fuel_consumption: number;
+  total_kms: number;
+  total_liters: number;
   seasonal_analysis: SeasonalAnalysis[];
   plot1_image: string;
   plot2_image: string;
@@ -78,6 +80,8 @@ export const AnalysisProvider: React.FC<{ children: ReactNode }> = ({ children }
         average_expenditure_per_refueling: analysis.average_expenditure_per_refueling || 0,
         average_price_per_km: analysis.average_price_per_km || 0,
         average_fuel_consumption: analysis.average_fuel_consumption || 0,
+        total_kms: analysis.total_kms || 0,
+        total_liters: analysis.total_liters || 0,
         seasonal_analysis: analysis.seasonal_analysis || [],
         plot1_image: plot1Image,
         plot2_image: plot2Image,
