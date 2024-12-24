@@ -22,6 +22,9 @@ const CarDataNavbar: React.FC = () => {
           <Link to="/car-data/summary">
             <button className="button">Project Summary</button>
           </Link>
+          <a href="https://github.com/SypekKonrad/car-data-analysis" target="_blank" rel="noopener noreferrer">
+            <button className="button">Github</button>
+          </a>
 
         </div>
       </div>
