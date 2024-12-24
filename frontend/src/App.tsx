@@ -8,7 +8,7 @@ import Home from './templates/Home';
 import CarDataReadme from './templates/car-data/CarDataReadme';
 import CarDataRaw from './templates/car-data/CarDataRaw';
 import CarDataAnalysis from "./templates/car-data/CarDataAnalysis";
-
+import CarDataSummary from "./templates/car-data/CarDataSummary";
 import './App.css';
 
 
@@ -48,6 +48,7 @@ const CarDataRoutes: React.FC = () => {
       <Route path="" element={<CarDataReadme />} />
       <Route path="raw" element={<CarDataRaw />} />
       <Route path="analysis" element={<CarDataAnalysis />} />
+      <Route path="summary" element={<CarDataSummary />} />
     </Routes>
   );
 };

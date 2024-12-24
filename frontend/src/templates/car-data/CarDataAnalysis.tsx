@@ -38,10 +38,10 @@ return (
       </p>
       <p>
         <ul>
-          <li><strong>Engine Type:</strong> 2.0L, inline 4, turbocharged</li>
-          <li><strong>Power:</strong> 110 horsepower, 250 Nm of torque</li>
-          <li><strong>Curb Weight:</strong> 1410 kg</li>
-          <li><strong>Fuel Type:</strong> Diesel</li>
+            <li>Engine Type: 2.0L, inline 4, turbocharged</li>
+          <li>Power: 110 horsepower, 250 Nm of torque</li>
+          <li>Curb Weight: 1410 kg</li>
+          <li>Fuel Type: Diesel</li>
         </ul>
       </p>
        <p>
