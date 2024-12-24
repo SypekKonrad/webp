@@ -14,3 +14,13 @@ h1 {
   color: #333;
   font-size: 2em;
 }
+
+.github-link {
+  color: #327bb0;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.github-link:hover {
+  color: #0077b5;
+}

@@ -1,19 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar: React.FC = () => (
     <nav className="navbar">
         <div className="navbar-container">
-            {/*<div className="navbar-logo">tu bylo  niby logo"my app"</div>*/}
-            <ul className="navbar-links">
-                <li className="navbar-item"><a href="/" className="navbar-link">Home</a></li>
-                <li className="navbar-item"><a href="/contact" className="navbar-link">Contact Me</a></li>
-                {/*reful url dac*/}
-                <li className="navbar-item"><a href="/car-data" className="navbar-link">Refueling Data</a></li>
-
-                {/*dac guzik do jakiegos socjalu/gita*/}
-                {/*<li className="navbar-item"><a href="/contact" className="navbar-link">Github</a></li>*/}
-            </ul>
+              <ul className="navbar-links">
+                <li className="navbar-item">
+                  <Link to="/" className="navbar-link">Home</Link>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/contact-me" className="navbar-link">Contact Me</Link>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/car-data" className="navbar-link">Refueling Data</Link>
+                </li>
+              </ul>
         </div>
     </nav>
 );

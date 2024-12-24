@@ -5,6 +5,7 @@ import Navbar from './components/navbar/navbar';
 import { CarDataProvider } from './context/CarDataContext';
 import { AnalysisProvider } from './context/CarDataContext';
 import Home from './templates/Home';
+import ContactMe from './templates/ContactMe';
 import CarDataReadme from './templates/car-data/CarDataReadme';
 import CarDataRaw from './templates/car-data/CarDataRaw';
 import CarDataAnalysis from "./templates/car-data/CarDataAnalysis";
@@ -25,6 +26,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/contact-me" element={<ContactMe />} />
 
         <Route
             path="/car-data/*"
