@@ -27,8 +27,11 @@
     "dev": "vite",
     "start": "vite",
     "build": "vite tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --watch=false"
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -51,7 +54,10 @@
     "@types/node": "^22.13.4",
     "@types/react-chartjs-2": "^2.5.7",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.0.6",
+    "jsdom": "^26.0.0",
     "typescript": "^5.7.3",
-    "vite": "^6.1.1"
+    "vite": "^6.1.1",
+    "vitest": "^3.0.6"
   }
 }
