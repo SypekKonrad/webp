@@ -10,3 +10,5 @@ __pycache__
 node_modules
 todolist.txt
 toyota-avensis-441923-f7a47164daac.json
+certbot
+frontend/dist
