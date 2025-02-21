@@ -5,6 +5,7 @@ const CarDataReadme: React.FC = () => {
     const { fetchCarData } = useCarData();
 
     useEffect(() => {
+        document.title = 'Readme ';
         fetchCarData();
     }, [fetchCarData]);
 
