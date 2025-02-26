@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # my apps
     'refuel_data',
+    'car_api',
 ]
 
 MIDDLEWARE = [
