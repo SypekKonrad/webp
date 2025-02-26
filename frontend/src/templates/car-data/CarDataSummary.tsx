@@ -3,6 +3,11 @@ import './CarData.css';
 import { useAnalysisData } from '../../context/CarDataContext';
 
 const CarDataSummary: React.FC = () => {
+
+  useEffect(() => {
+    document.title = 'Summary';
+  }, []);
+
     const {analysisData, loading, error} = useAnalysisData();
 
     if (loading) return <p>Loading analysis data...</p>;

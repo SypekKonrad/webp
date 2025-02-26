@@ -1,11 +1,16 @@
 // tu będzie wyswietlona tabelka z rawem
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useCarData } from '../../context/CarDataContext';
 
 import './CarData.css';
 
 
 const CarDataRaw: React.FC = () => {
+
+  useEffect(() => {
+    document.title = 'Raw Data';
+  }, []);
+
   const { carData, loading, error } = useCarData();
 
   if (loading) return <p>Loading...</p>;

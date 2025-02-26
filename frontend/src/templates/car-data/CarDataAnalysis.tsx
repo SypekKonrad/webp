@@ -3,6 +3,11 @@ import './CarData.css';
 import { useAnalysisData } from '../../context/CarDataContext';
 
 const CarDataVisualization: React.FC = () => {
+
+    useEffect(() => {
+    document.title = 'Analysis';
+  }, []);
+
   const { analysisData, loading, error } = useAnalysisData();
 
 
