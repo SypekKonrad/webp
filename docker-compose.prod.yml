@@ -36,16 +36,19 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/
 
     ports:
-      - 1337:80
-      - 443:443
+#      migracja na cloudflare, to zakomentowalem
+#      - 1337:80
+#      - 443:443
+#      to dla cloudflare bo cf obsluguje ssl wiec tylko mapowanie 80 80
+      - 80:80
     depends_on:
       - backend
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/
-      - ./certbot/conf/:/etc/letsencrypt/
+#   clouflare ogarnia ssl wiec certbot niepotrzebny
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+#      - ./certbot/www/:/var/www/certbot/
+#      - ./certbot/conf/:/etc/letsencrypt/
 
 volumes:
   postgres_data:
